@@ -1,3 +1,5 @@
+import { signIn, signOut, useSession } from "next-auth/react";
+
 type Product = {
     _id: string;
     asin: string;
@@ -24,8 +26,20 @@ type ApiResponse = {
 };
 
 export default function Home({ products }: { products: Product[] }) {
+    const { data: session } = useSession();
     return (
         <div className="container">
+            {session ? (
+                <>
+                    Signed in as {session.user && session.user.email} <br />
+                    <button onClick={() => signOut()}>Sign out</button>
+                </>
+            ) : (
+                <>
+                    Not signed in <br />
+                    <button onClick={() => signIn()}>Sign in</button>
+                </>
+            )}
             <div>
                 {products.length > 0 &&
                     products.map((product) => {
