@@ -8,12 +8,12 @@ algum produto o mesmo deve aparecer listado nos favoritos do usuário.
 
 ### Requisitos
 
-- O sistema deve ter um login
-- O sistema deve ser feito com nodejs e reactjs e persistindo os dados em um banco de dados
-  mongodb online. Fique a vontade para escolher a estilização.
-- Deve ser utilizado a ferramenta git para versionamento
-- Escreva um readme falando como rodar seu projeto.
-- Projeto deve estar disponivel online alguma plataforma cloud online(Heroku,Vercel,AWS).
+-   O sistema deve ter um login
+-   O sistema deve ser feito com nodejs e reactjs e persistindo os dados em um banco de dados
+    mongodb online. Fique a vontade para escolher a estilização.
+-   Deve ser utilizado a ferramenta git para versionamento
+-   Escreva um readme falando como rodar seu projeto.
+-   Projeto deve estar disponivel online alguma plataforma cloud online(Heroku,Vercel,AWS).
 
 ---
 
@@ -43,11 +43,10 @@ yarn start
 
 ## Tecnologias Usadas
 
-- Typescript
-- ReactJS
-- Redux
-- Styled-components
-- Next Auth
+-   Typescript
+-   ReactJS
+-   NextJS
+-   Next Auth
 
 ## Banco de dados
 
@@ -55,4 +54,4 @@ Utilizando o mongodb gratuito disponível em https://www.mongodb.com/atlas/
 
 ## Equipe
 
-- Desenvolvido por Arthur Araújo
+-   Desenvolvido por Arthur Araújo
