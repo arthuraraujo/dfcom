@@ -27,31 +27,37 @@ export default function Home({ products }: { products: Product[] }) {
     return (
         <div className="container">
             <div>
-                {products.map((product) => {
-                    return (
-                        <div className="card" key={product.asin}>
-                            <p>{product.thumbnail}</p>
-                            <p>
-                                <img src={product.thumbnail} />
-                            </p>
-                        </div>
-                    );
-                })}
+                {products.length > 0 &&
+                    products.map((product) => {
+                        return (
+                            <div className="card" key={product.asin}>
+                                <p>{product.thumbnail}</p>
+                                <p>
+                                    <img src={product.thumbnail} />
+                                </p>
+                            </div>
+                        );
+                    })}
             </div>
         </div>
     );
 }
 
 export async function getServerSideProps() {
-    let res = await fetch(`${process.env.API_URL}/products`, {
-        method: "GET",
-        headers: {
-            "Content-Type": "application/json",
-        },
-    });
-    let response: ApiResponse = await res.json();
+    try {
+        let res = await fetch(`${process.env.API_URL}/products`, {
+            method: "GET",
+            headers: {
+                "Content-Type": "application/json",
+            },
+        });
+        let response: ApiResponse = await res.json();
 
-    return {
-        props: { products: response.data },
-    };
+        return {
+            props: { products: response.data },
+        };
+    } catch (e: any) {
+        console.log({ e, message: e.message });
+        return [];
+    }
 }
