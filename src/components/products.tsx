@@ -1,4 +1,3 @@
-import { useSession } from "next-auth/react";
 import Image from "next/image";
 import { useState } from "react";
 
@@ -32,7 +31,6 @@ const convertedPrice = (price: number) => {
 const showLoginModal = () => {};
 
 export default function Products({ data }: { data: Product[] }) {
-    const { data: session } = useSession();
     const [favorites, setFavorites] = useState<Array<string>>([]);
 
     const addFavorite = (id: string) => {
