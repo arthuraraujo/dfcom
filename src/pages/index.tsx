@@ -1,8 +1,4 @@
-import { Header, Products, Footer } from "../components";
-
-// const imageLoader = ({ src, width, quality }) => {
-//   return `https://example.com/${src}?w=${width}&q=${quality || 75}`
-// }
+import { Header, Products } from "../components";
 
 type Product = {
     _id: string;
@@ -34,7 +30,6 @@ export default function Home({ products }: { products: Product[] }) {
         <>
             <Header />
             <Products data={products} />
-            {/* <Footer /> */}
         </>
     );
 }
