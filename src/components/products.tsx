@@ -1,5 +1,5 @@
-import Image from "next/image";
 import { useSession } from "next-auth/react";
+import Image from "next/image";
 import { useState } from "react";
 
 type Product = {
@@ -52,67 +52,59 @@ export default function Products({ data }: { data: Product[] }) {
                             data.length > 0 &&
                             data.map((dt) => {
                                 return (
-                                    <>
-                                        <div
-                                            className="rounded-lg py-10 flex flex-col items-center justify-center shadow-lg border border-gray-100 p-5"
-                                            key={dt.asin}
-                                        >
-                                            <Image
-                                                src={dt.thumbnail}
-                                                alt={dt.title}
-                                                width={220}
-                                                height={250}
-                                            />
-                                            <p className="mt-4 line-clamp-2">
-                                                {dt.title}
-                                            </p>
-                                            <div className="flex items-center justify-stretch m-0 pt-0	w-full mt-4">
-                                                <p className=" text-sm text-gray-500 flex-1	">
-                                                    {convertedPrice(
-                                                        dt.price.current_price
-                                                    )}
-                                                </p>
-                                                <div className="flex flex-grow-1 "></div>
-                                                {!favorites.includes(
-                                                    dt.asin
-                                                ) ? (
-                                                    <button
-                                                        className=" border border-gray-400 text-gray-600 font-bold py-1 px-2 rounded inline-flex items-center"
-                                                        onClick={
-                                                            () =>
-                                                                addFavorite(
-                                                                    dt.asin
-                                                                )
-                                                            // session
-                                                            //     ? addFavorite(
-                                                            //           dt.asin
-                                                            //       )
-                                                            //     : showLoginModal()
-                                                        }
-                                                    >
-                                                        <span className="text-2xl">
-                                                            &#9825; &nbsp;&nbsp;
-                                                        </span>
-                                                        <span>Favoritar</span>
-                                                    </button>
-                                                ) : (
-                                                    <button
-                                                        className=" border border-red-400 text-red-600 font-bold py-1 px-2 rounded inline-flex items-center"
-                                                        onClick={() =>
-                                                            removeFavorite(
-                                                                dt.asin
-                                                            )
-                                                        }
-                                                    >
-                                                        <span className="text-2xl">
-                                                            &#9829; &nbsp;&nbsp;
-                                                        </span>
-                                                        <span>Favorito</span>
-                                                    </button>
+                                    <div
+                                        className="rounded-lg py-10 flex flex-col items-center justify-center shadow-lg border border-gray-100 p-5"
+                                        key={dt.asin}
+                                    >
+                                        <Image
+                                            src={dt.thumbnail}
+                                            alt={dt.title}
+                                            width={220}
+                                            height={250}
+                                        />
+                                        <p className="mt-4 line-clamp-2">
+                                            {dt.title}
+                                        </p>
+                                        <div className="flex items-center justify-stretch m-0 pt-0	w-full mt-4">
+                                            <p className=" text-sm text-gray-500 flex-1	">
+                                                {convertedPrice(
+                                                    dt.price.current_price
                                                 )}
-                                            </div>
+                                            </p>
+                                            <div className="flex flex-grow-1 "></div>
+                                            {!favorites.includes(dt.asin) ? (
+                                                <button
+                                                    className=" border border-gray-400 text-gray-600 font-bold py-1 px-2 rounded inline-flex items-center"
+                                                    onClick={
+                                                        () =>
+                                                            addFavorite(dt.asin)
+                                                        // session
+                                                        //     ? addFavorite(
+                                                        //           dt.asin
+                                                        //       )
+                                                        //     : showLoginModal()
+                                                    }
+                                                >
+                                                    <span className="text-2xl">
+                                                        &#9825; &nbsp;&nbsp;
+                                                    </span>
+                                                    <span>Favoritar</span>
+                                                </button>
+                                            ) : (
+                                                <button
+                                                    className=" border border-red-400 text-red-600 font-bold py-1 px-2 rounded inline-flex items-center"
+                                                    onClick={() =>
+                                                        removeFavorite(dt.asin)
+                                                    }
+                                                >
+                                                    <span className="text-2xl">
+                                                        &#9829; &nbsp;&nbsp;
+                                                    </span>
+                                                    <span>Favorito</span>
+                                                </button>
+                                            )}
                                         </div>
-                                    </>
+                                    </div>
                                 );
                             })}
                     </div>
