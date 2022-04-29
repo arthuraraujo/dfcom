@@ -1,4 +1,7 @@
 import Image from "next/image";
+import { useSession } from "next-auth/react";
+import { useState } from "react";
+
 type Product = {
     _id: string;
     asin: string;
@@ -26,9 +29,20 @@ const convertedPrice = (price: number) => {
     const convertedPrice = `${priceWithTwoDecimals}`.replace(/\./g, ",");
     return `R$ ${convertedPrice}`;
 };
+const showLoginModal = () => {};
 
-const addFavorite = (id: string) => {};
 export default function Products({ data }: { data: Product[] }) {
+    const { data: session } = useSession();
+    const [favorites, setFavorites] = useState<Array<string>>([]);
+
+    const addFavorite = (id: string) => {
+        setFavorites([...favorites, id]);
+    };
+    const removeFavorite = (id: string) => {
+        const newFavorites = favorites.filter((fav) => fav !== id);
+        setFavorites(newFavorites);
+    };
+
     return (
         <>
             <section className="py-12 sm:py-16 bg-white">
@@ -49,25 +63,53 @@ export default function Products({ data }: { data: Product[] }) {
                                                 width={220}
                                                 height={250}
                                             />
-                                            <p className="mt-4">{dt.title}</p>
+                                            <p className="mt-4 line-clamp-2">
+                                                {dt.title}
+                                            </p>
                                             <div className="flex items-center justify-stretch m-0 pt-0	w-full mt-4">
                                                 <p className=" text-sm text-gray-500 flex-1	">
                                                     {convertedPrice(
                                                         dt.price.current_price
                                                     )}
                                                 </p>
-                                                <div className="flex flex-1 "></div>
-                                                <button
-                                                    className=" border border-gray-400 text-gray-600 font-bold py-2 px-4 rounded inline-flex items-center"
-                                                    onClick={() =>
-                                                        addFavorite(dt.asin)
-                                                    }
-                                                >
-                                                    <span className="text-2xl">
-                                                        &#9825; &nbsp;&nbsp;
-                                                    </span>
-                                                    <span>Favoritar</span>
-                                                </button>
+                                                <div className="flex flex-grow-1 "></div>
+                                                {!favorites.includes(
+                                                    dt.asin
+                                                ) ? (
+                                                    <button
+                                                        className=" border border-gray-400 text-gray-600 font-bold py-1 px-2 rounded inline-flex items-center"
+                                                        onClick={
+                                                            () =>
+                                                                addFavorite(
+                                                                    dt.asin
+                                                                )
+                                                            // session
+                                                            //     ? addFavorite(
+                                                            //           dt.asin
+                                                            //       )
+                                                            //     : showLoginModal()
+                                                        }
+                                                    >
+                                                        <span className="text-2xl">
+                                                            &#9825; &nbsp;&nbsp;
+                                                        </span>
+                                                        <span>Favoritar</span>
+                                                    </button>
+                                                ) : (
+                                                    <button
+                                                        className=" border border-red-400 text-red-600 font-bold py-1 px-2 rounded inline-flex items-center"
+                                                        onClick={() =>
+                                                            removeFavorite(
+                                                                dt.asin
+                                                            )
+                                                        }
+                                                    >
+                                                        <span className="text-2xl">
+                                                            &#9829; &nbsp;&nbsp;
+                                                        </span>
+                                                        <span>Favorito</span>
+                                                    </button>
+                                                )}
                                             </div>
                                         </div>
                                     </>
