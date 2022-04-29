@@ -23,7 +23,9 @@ algum produto o mesmo deve aparecer listado nos favoritos do usuário.
 
 1 - Clonar o repositório do projeto
 
-2 - Instalar as dependências
+2 - Renomear o arquivo ".env.local.example" para ".env.local" e preencher com as informações adequadas
+
+3 - Instalar as dependências
 
 Instalar com YARN
 
