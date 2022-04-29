@@ -1,4 +1,8 @@
-import { signIn, signOut, useSession } from "next-auth/react";
+import { Header, Products, Footer } from "../components";
+
+// const imageLoader = ({ src, width, quality }) => {
+//   return `https://example.com/${src}?w=${width}&q=${quality || 75}`
+// }
 
 type Product = {
     _id: string;
@@ -26,34 +30,12 @@ type ApiResponse = {
 };
 
 export default function Home({ products }: { products: Product[] }) {
-    const { data: session } = useSession();
     return (
-        <div className="container">
-            {session ? (
-                <>
-                    Signed in as {session.user && session.user.email} <br />
-                    <button onClick={() => signOut()}>Sign out</button>
-                </>
-            ) : (
-                <>
-                    Not signed in <br />
-                    <button onClick={() => signIn()}>Sign in</button>
-                </>
-            )}
-            <div>
-                {products.length > 0 &&
-                    products.map((product) => {
-                        return (
-                            <div className="card" key={product.asin}>
-                                <p>{product.thumbnail}</p>
-                                <p>
-                                    <img src={product.thumbnail} />
-                                </p>
-                            </div>
-                        );
-                    })}
-            </div>
-        </div>
+        <>
+            <Header />
+            <Products data={products} />
+            {/* <Footer /> */}
+        </>
     );
 }
 
